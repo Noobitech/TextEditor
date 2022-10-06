@@ -1,0 +1,19 @@
+
+<script src="//unpkg.com/mathlive"></script>
+<math-field id="lo" virtual-keyboard-mode=manual>
+    Mathematical Equations
+</math-field>
+<style>
+    #lo{
+        width:50%;
+    }
+</style>
+<iframe name="tf" id="demo" virtual-keyboard-mode=manual></iframe>
+<p id="de"></p>
+<script>
+    tf.document.designMode="On";
+    document.getElementById('lo').addEventListener('input',(ev) => {
+        var myFrame = document.getElementById('demo');
+  myFrame.contentDocument.body.innerHTML = ev.target.value;
+});
+</script>

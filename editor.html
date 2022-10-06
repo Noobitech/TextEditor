@@ -1,0 +1,126 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>DOC</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="src/FileSaver.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <p>Text Editor</p>
+        </div>
+    </nav>
+
+    <div>
+        <form>
+            <div class="dropdown" style="position: absolute; border: none;">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width:100px; background-color: gainsboro; color:black;">File
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><button type="button" onclick="saveDynamicDataToFile()" style="width:150px; margin:2px 5px;">Save</button></li>
+                    <li><button type="button" onclick="saveDynamicDataToFile()" style="width:150px; margin: 0px 5px;"><a href="editor.html">New</a></button></li>
+                </ul>
+            </div>
+            <button type="button" data-cmd="justifyLeft" style="margin-left: 105px;">
+                <i class="fa fa-align-left" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="justifyCenter">
+                <i class="fa fa-align-center" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="justifyFull">
+                <i class="fa fa-align-justify" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="justifyRight">
+                <i class="fa fa-align-right" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="bold">
+                <i class="fa fa-bold" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="italic">
+                <i class="fa fa-italic" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="underline">
+                <i class="fa fa-underline" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="insertOrderedList">
+                <i class="fa fa-list-ol" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="insertUnorderedList">
+                <i class="fa fa-list-ul" area-hidden="true"></i>
+            </button>
+            <select id="input-font" class="input" onchange="changeFontStyle (this);" style="height:30px;">
+
+                <option value="Times New Roman" selected="selected">
+                    Times New Roman
+                </option>
+                <option value="Arial">Arial</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="cursive">cursive</option>
+            </select>
+            <select id="fontSizeDD" style="height:30px;">
+                <option value='12'>12</option>
+                <option value='14'>14</option>
+                <option value='16'>16</option>
+                <option value='18'>18</option>
+                <option value='20'>20</option>
+                <option value='22'>22</option>
+                <option value='24'>24</option>
+                <option value='26'>26</option>
+            </select>
+            <button type="button" data-cmd="subscript">
+                <i class="fa fa-subscript" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="superscript">
+                <i class="fa fa-superscript" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="insertImage">
+                <i class="fa fa-file-image-o" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="createLink">
+                <i class="fa fa-link" area-hidden="true"></i>
+            </button>
+            <button type="button" data-cmd="table">
+                <i class="fa fa-table" area-hidden="true"></i>
+            </button>
+
+        </form>
+
+        <iframe id="output" name="textField">
+        </iframe>
+    </div>
+    <script>
+        function saveDynamicDataToFile() {
+
+            var myIFrame = document.getElementById("output");
+            var userInput = myIFrame.contentWindow.document.body.innerText;
+            var blob = new Blob([userInput], {
+                type: "application/octetstream"
+            });
+            saveAs(blob, "data.txt");
+        }
+
+    </script>
+    <script>
+        const buttons = document.querySelectorAll('button');
+        textField.document.designMode = "On";
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', () => {
+                let cmd = buttons[i].getAttribute('data-cmd');
+                if (buttons[i].name === "active") {
+                    buttons[i].classList.toggle('active');
+                }
+            })
+        }
+
+    </script>
+</body>
+
+</html>
